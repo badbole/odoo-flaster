@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_backup_conf_form" model="ir.ui.view">
+        <field name="model">db.backup</field>
+        <field name="name">view_backup_conf_form</field>
+        <field name="inherit_id" ref="auto_backup.view_backup_conf_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//ol/.." position="after">
+                <div >
+                    <h3>Backup files available</h3>
+                    <field name="backup_files"/>
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+<!--attrs="{'invisible': [('method', '==', 'sftp')]}"-->
+</odoo>

@@ -16,5 +16,12 @@ class DbBackup(models.Model):
             if record.method == "sftp":
                 record.backup_files = "Not yet covered - sftp"
                 continue
+            if  not record.folder or not os.path.exists(record.folder):
+                record.backup_files = "Backup folder not yet configured!"
+                continue
             files = [a for a in os.listdir(record.folder) if a not in [".", ".."]]
-            record.backup_files = "\n".join(files)
+            if files:
+                files.sort()
+                record.backup_files = "\n".join(files)
+            else:
+                record.backup_files = "No backup files found!"

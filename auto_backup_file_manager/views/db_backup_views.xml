@@ -8,7 +8,11 @@
             <xpath expr="//ol/.." position="after">
                 <div >
                     <h3>Backup files available</h3>
+                    <button string="Manage files"
+                            type="object"
+                            name="action_file_manager"/>
                     <field name="backup_files"/>
+
                 </div>
 
             </xpath>

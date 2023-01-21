@@ -12,7 +12,9 @@
         'auto_backup',
     ],
     'data': [
-        "views/db_backup_views.xml"
+        "views/db_backup_views.xml",
+        "wizard/db_file_manager_views.xml",
+        "security/ir.model.access.csv",
     ],
     "installable": True,
 }

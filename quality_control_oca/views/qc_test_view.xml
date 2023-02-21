@@ -35,7 +35,7 @@
                         </group>
                     </group>
                     <field name="test_lines" nolabel="1">
-                        <tree>
+                        <tree >
                             <field name="sequence" widget="handle" />
                             <field name="name" />
                             <field name="type" />
@@ -87,11 +87,11 @@
                 <group
                     name="qualitative"
                     string="Answers"
-                    colspan="4"
                     attrs="{'invisible': [('type', '!=', 'qualitative')]}"
                 >
                     <field
                         name="ql_values"
+                        colspan="2"
                         nolabel="1"
                         attrs="{'required': [('type','=','qualitative')]}"
                     >

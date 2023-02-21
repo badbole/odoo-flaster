@@ -16,6 +16,8 @@ class QcTest(models.Model):
 
     def object_selection_values(self):
         res = super().object_selection_values()
+        if isinstance(res, set):
+            res = []
         res.extend([
             ("stock.picking", 'Stock Picking'),
             ('stock.lot', 'Stock  production Lot')

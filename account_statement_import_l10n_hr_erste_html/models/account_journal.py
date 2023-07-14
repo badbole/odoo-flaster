@@ -10,5 +10,5 @@ class AccountJournal(models.Model):
     def _get_bank_statements_available_import_formats(self):
         res = super(AccountJournal, self). \
             _get_bank_statements_available_import_formats()
-        res.extend([('l10n_hr_erste_html'), _('Croatia-Erste-html')])
+        res.append("l10n_hr_erste_html")
         return res

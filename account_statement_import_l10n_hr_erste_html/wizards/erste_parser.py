@@ -38,7 +38,7 @@ class ErsteParser(object):
         statements = []
         currency_code = None
         account_number = None
-
+        #speeddict =
         for el in root.xpath(".//div[@id='Generalno']"):
             spans = el.xpath(".//span")
             if len(spans) < 3:
@@ -50,8 +50,6 @@ class ErsteParser(object):
             elif "Broj izvoda:" in spans[0].text:
                 broj_izvoda = spans[2].text
 
-        #DB: samo ako je multivalutni račun.. inace ne ovo...
-        #account_number = '%s' % (account_number, currency_code)
 
         for stanje in root.xpath(".//table[@class='tbHeadDown']"):
             st = stanje.xpath(".//tr/td")
@@ -64,14 +62,16 @@ class ErsteParser(object):
         for item in root.findall(".//tr[@class='trItems']"):
             trans = {}
             lines = item.findall('td')  # item.xpath("./td")
-            trans['name'] = lines[2].text
+            #trans['name'] = lines[2].text
             trans['date'] = self.convert_date(lines[0].text.split('[|]')[1])
             trans['account_number'] = lines[1].text.split('[|]')[1]
+            trans['partner_name'] = lines[1].text.split('[|]')[0]
             ref = lines[3].text.split('[|]')
             trans['ref'] = ref[1] != 'HR99' and ref[1] or None
             trans['payment_ref'] = ref[2]
             trans['unique_import_id'] = trans['account_number'] + currency_code + ref[2]
             trans['amount'] = lines[5].text is None and - self._get_amount(lines[4].text) or self._get_amount(lines[5].text)
+            trans['raw_data'] = etree.tostring(item)
             if trans:
                 transactions.append(trans)
         statements.append({

@@ -7,10 +7,13 @@
     "category": "Accounting",
     "version": "16.0.1.0.0",
     "license": "LGPL-3",
-    "depends": ["account"],
+    "depends": ["account_statement_base"],
     "author": "Akretion, Odoo Community Association (OCA)",
     "maintainers": ["alexis-via"],
     "development_status": "Mature",
     "website": "https://github.com/OCA/bank-statement-import",
+    "data": [
+        "views/account_bank_statement_line.xml",
+    ],
     "installable": True,
 }

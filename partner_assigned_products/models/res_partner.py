@@ -13,4 +13,4 @@ class ResPartner(models.Model):
         comodel_name='product.product',
         relation="product_product_partner_rel",
         column1="partner_id", column2="product_id",
-        string='Allowed Product Variants')
+        string='Allowed Variants')

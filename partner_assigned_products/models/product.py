@@ -8,7 +8,7 @@ class ProductTemplate(models.Model):
         comodel_name='res.partner',
         relation="product_template_partner_rel",
         column1="product_id", column2="partner_id",
-        string='Customers'
+        string='Template Customers'
     )
 
 class Product(models.Model):
@@ -18,5 +18,5 @@ class Product(models.Model):
         comodel_name='res.partner',
         relation="product_product_partner_rel",
         column1="product_id", column2="partner_id",
-        string='Customers'
+        string='Variant Customers'
     )

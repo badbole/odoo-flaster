@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_workcenter_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Workcenters" name="mrp">
+                    <field name="allowed_workcenter_ids"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

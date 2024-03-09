@@ -1,0 +1,63 @@
+<odoo>
+    <record id="mrp_production_workorder_tree_view" model="ir.ui.view">
+        <field name="name">mrp_production_workorder_tree_view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="workcenter_id" position="after">
+                <field name="allowed_user_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+        </field>
+    </record>
+    <record id="mrp_my_workorder_search_view" model="ir.ui.view">
+        <field name="name">mrp_my_workorder_search_view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_work_order_search"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <filter name="my_orders" string="My orders" domain="[('allowed_user_ids', 'in', uid)]"/>
+            </field>
+            <filter name="workcenter" position="before">
+                <filter name="per_user" string="Per user" context="{'group_by': 'allowed_user_ids'}"/>
+            </filter>
+        </field>
+    </record>
+    <record id="mrp_my_workorder_form_view_search_view" model="ir.ui.view">
+        <field name="name">mrp_my_workorder_form_view_search_view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_workorder_form_view_filter"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <filter name="my_orders" string="My orders" domain="['&amp;', ('allowed_user_ids', 'in', uid), ('state', 'not in', ['draft', 'cancel', 'done'])]"/>
+                <filter name="my_orders_all" string="All My orders" domain="[('allowed_user_ids', 'in', uid)]"/>
+            </field>
+            <filter name="work_center" position="before">
+                <filter name="per_user" string="Per user" context="{'group_by': 'allowed_user_ids'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <!-- custom action for my orders s-->
+    <record id="action_mrp_workorder_user_specific" model="ir.actions.act_window">
+        <field name="name">My Work Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.workorder</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="search_view_id" ref="mrp.view_mrp_production_workorder_form_view_filter"/>
+        <field name="domain">[('production_state','not in',('done','cancel'))]</field>
+        <field name="context">{'search_default_my_orders':True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            No work orders to do!
+          </p><p>
+            Work orders are operations to do as part of a manufacturing order.
+            Operations are defined in the bill of materials or added in the manufacturing order directly.
+          </p>
+        </field>
+    </record>
+    <menuitem id="menu_my_mrp_workorder"
+                name="My Work Orders"
+                action="action_mrp_workorder_user_specific"
+                parent="mrp.menu_mrp_manufacturing"
+                groups="mrp.group_mrp_routings"/>
+</odoo>

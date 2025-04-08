@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="lu_dynamics_crm_view_tree" model="ir.ui.view">
+        <field name="name">lu.dynamics.crm.tree</field>
+        <field name="model">lu.dynamics.crm</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="client_secret"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="lu_dynamics_crm_view_form" model="ir.ui.view">
+        <field name="name">lu.dynamics.crm.form</field>
+        <field name="model">lu.dynamics.crm</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_get_contacts" type="object" class="oe_highlight" string="Get Contacts"/>
+                    <button name="action_get_accounts" type="object" class="oe_highlight" string="Get Accounts"/>
+                    <button name="action_get_opportunities" type="object" class="oe_highlight" string="Get Opportunities"/>
+                    <button name="action_get_leads" type="object" class="oe_highlight" string="Get Leads"/>
+                    <button name="action_get_campaigns" type="object" class="oe_highlight" string="Get Campaigns"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="domain"/>
+                            <field name="region"/>
+                            <field name="client_id"/>
+                            <field name="client_secret" password="True"/>
+                            <field name="tenant_id"/>
+                            <field name="scope"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_lu_dynamics_crm" model="ir.actions.act_window">
+        <field name="name">Dynamics CRM</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">lu.dynamics.crm</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Dynamics CRM" id="lu_dynamics_crm_menu" web_icon="lu_dynamics365crm" groups='base.group_user'/>
+
+    <menuitem
+            name="Dynamics CRM"
+            action="action_lu_dynamics_crm"
+            sequence="1"
+            id="lu_dynamics_crm"
+            parent="lu_dynamics365crm.lu_dynamics_crm_menu"
+    />
+
+</odoo>

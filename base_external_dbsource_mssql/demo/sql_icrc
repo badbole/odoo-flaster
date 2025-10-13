@@ -1,0 +1,18 @@
+CREATE TABLE icrc.dbo.partner (
+	first_name varchar(100) NULL,
+	last_name varchar(100) NULL,
+	id int IDENTITY(1,1) NOT NULL,
+	CONSTRAINT partner_pk PRIMARY KEY (id)
+);
+
+
+qry = """
+insert into partner (first_name, last_name)
+values
+('John', 'Doe'),
+('Jim', 'Morrison'),
+('Tong', 'Po')"""
+
+https://docs.sqlalchemy.org/en/20/tutorial/dbapi_transactions.html#fetching-rows
+
+https://docs.sqlalchemy.org/en/20/tutorial/data_select.html#tutorial-selecting-data

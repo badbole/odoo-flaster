@@ -70,7 +70,7 @@ class ErsteParser(object):
             trans['ref'] = ref[1] != 'HR99' and ref[1] or None
             trans['payment_ref'] = ref[2]
             trans['unique_import_id'] = trans['account_number'] + currency_code + ref[2]
-            trans['amount'] = lines[5].text is None and - self._get_amount(lines[4].text) or self._get_amount(lines[5].text)
+            trans['amount'] = lines[5].text in [None, ' '] and - self._get_amount(lines[4].text) or self._get_amount(lines[5].text)
             trans['raw_data'] = etree.tostring(item)
             if trans:
                 transactions.append(trans)
